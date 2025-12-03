@@ -3,4 +3,21 @@
     <string name="tab_first">Chats</string>
     <string name="tab_second">Novedades</string>
     <string name="tab_third">Llamadas</string>
+
+    <string name="sticky_dpt_informatica">Departamento Informática</string>
+    <string name="sticky_com_propietarios">Comunidad Propietarios</string>
+    <string name="sticky_gym">Gimnasio</string>
+
+    <string name="jefe_dpt">Jefe de departamento</string>
+    <string name="tutora_dam">Tutora de DAM</string>
+    <string name="tutor_daw">Tutor DAW</string>
+    <string name="tutora_asix">Tutora ASIX</string>
+
+    <string name="presidenta">Presidenta</string>
+    <string name="secretaria">Secretaria</string>
+    <string name="administrador">Administrador</string>
+
+    <string name="entrenadora">Entrenadora</string>
+    <string name="nutricionista">Nutricionista</string>
+    <string name="fisio">Fisioterapeuta</string>
 </resources>

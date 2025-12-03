@@ -23,20 +23,14 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.mywhatsapp.ui.theme.MyWhatsappTheme
 
 class MainActivity : ComponentActivity() {
@@ -62,7 +56,9 @@ class MainActivity : ComponentActivity() {
                         .nestedScroll(scrollBehavior.nestedScrollConnection),
                     floatingActionButton = {
                         FloatingActionButton(
-                            onClick = {/* Hacer algo */}
+                            onClick = {/* Hacer algo */},
+                            containerColor = MaterialTheme.colorScheme.secondary,
+                            contentColor = MaterialTheme.colorScheme.onPrimary
                         ) {
                             Icon(
                                 Icons.Default.Done,
@@ -74,7 +70,7 @@ class MainActivity : ComponentActivity() {
                     topBar = {
                         TopAppBar(
                             colors = TopAppBarDefaults.topAppBarColors(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                containerColor = MaterialTheme.colorScheme.primary,
                                 titleContentColor = MaterialTheme.colorScheme.onPrimary
                             ),
                             title = {
@@ -88,7 +84,8 @@ class MainActivity : ComponentActivity() {
                                 ) {
                                     Icon(
                                         imageVector = Icons.Default.Search,
-                                        contentDescription = "Imagen derecha buscar"
+                                        contentDescription = "Imagen derecha buscar",
+                                        tint = MaterialTheme.colorScheme.onPrimary
                                     )
                                 }
                                 IconButton(
@@ -96,7 +93,8 @@ class MainActivity : ComponentActivity() {
                                 ) {
                                     Icon(
                                         imageVector = Icons.Default.Share,
-                                        contentDescription = "Imagen derecha share"
+                                        contentDescription = "Imagen derecha share",
+                                        tint = MaterialTheme.colorScheme.onPrimary
                                     )
                                 }
                             },
@@ -111,7 +109,7 @@ class MainActivity : ComponentActivity() {
                             .fillMaxSize()
 
                     ) {
-                        PrimaryTabRow(selectedTabIndex = state) {
+                        PrimaryTabRow(selectedTabIndex = state, containerColor = MaterialTheme.colorScheme.primary, contentColor = MaterialTheme.colorScheme.onPrimary) {
                             titulos.forEachIndexed { index, titulo ->
                                 Tab(
                                     selected = state == index,
