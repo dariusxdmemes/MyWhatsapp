@@ -7,6 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Search
@@ -26,12 +28,14 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import com.example.mywhatsapp.ui.theme.MyWhatsappTheme
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -40,15 +44,14 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyWhatsappTheme {
-                var state by remember {
-                    mutableIntStateOf(0)
-                }
                 val titulos = listOf(
                     stringResource(R.string.tab_first),
                     stringResource(R.string.tab_second),
                     stringResource(R.string.tab_third)
                 )
                 val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+                val pagerState = rememberPagerState(pageCount = { 3 })
+                val coroutine = rememberCoroutineScope()
 
                 Scaffold(
                     modifier = Modifier
@@ -105,15 +108,18 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
                     Column(
                         modifier = Modifier
-                            .padding(innerPadding)
                             .fillMaxSize()
-
+                            .padding(innerPadding)
                     ) {
-                        PrimaryTabRow(selectedTabIndex = state, containerColor = MaterialTheme.colorScheme.primary, contentColor = MaterialTheme.colorScheme.onPrimary) {
+                        PrimaryTabRow(
+                            selectedTabIndex = pagerState.currentPage,
+                            containerColor = MaterialTheme.colorScheme.primary,
+                            contentColor = MaterialTheme.colorScheme.onPrimary,
+                            ) {
                             titulos.forEachIndexed { index, titulo ->
                                 Tab(
-                                    selected = state == index,
-                                    onClick = { state = index },
+                                    selected = pagerState.currentPage == index,
+                                    onClick = { coroutine.launch { pagerState.animateScrollToPage(index) } },
                                     text = {
                                         Text(
                                             text = titulo, maxLines = 2, overflow = TextOverflow.Ellipsis
@@ -122,10 +128,16 @@ class MainActivity : ComponentActivity() {
                                 )
                             }
                         }
-                        when (state) {
-                            0 -> PantallaPrincipal(modifier = Modifier.padding(innerPadding))
-                            1 -> PantallaNovedades(modifier = Modifier.padding(innerPadding))
-                            2 -> PantallaLlamadas(modifier = Modifier.padding(innerPadding))
+                        HorizontalPager(
+                            state = pagerState,
+                            modifier = Modifier
+                                .fillMaxSize()
+                        ) { page ->
+                            when (page) {
+                                0 -> PantallaPrincipal()
+                                1 -> PantallaNovedades()
+                                2 -> PantallaLlamadas()
+                            }
                         }
                     }
                 }

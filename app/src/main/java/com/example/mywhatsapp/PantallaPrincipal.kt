@@ -21,7 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun PantallaPrincipal(modifier: Modifier) {
+fun PantallaPrincipal() {
     val context = LocalContext.current
     val datosStickyHeaders = getStickyData().groupBy { it.headerLabel }
 

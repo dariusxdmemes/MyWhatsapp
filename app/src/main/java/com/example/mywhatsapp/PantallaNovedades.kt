@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 
 @Composable
-fun PantallaNovedades(modifier: Modifier) {
+fun PantallaNovedades() {
     Text(
         text = stringResource(R.string.tab_second)+" works!"
     )

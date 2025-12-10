@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 
 @Composable
-fun PantallaLlamadas(modifier: Modifier) {
+fun PantallaLlamadas() {
     Text(
         text = stringResource(R.string.tab_third)+" works!"
     )
