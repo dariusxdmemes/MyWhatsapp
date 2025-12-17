@@ -1,0 +1,30 @@
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:height="24dp"
+    android:viewportHeight="200"
+    android:viewportWidth="200"
+    android:width="24dp">
+
+    <path
+        android:name="cara"
+        android:fillColor="#f5d142"
+        android:pathData="M 50,50 m -48,0 a 48,48 0 1,0 96,0 a 48,48 0 1,0 -96,0"/>
+
+    <path
+        android:name="ojo_izquierdo"
+        android:fillColor="@android:color/black"
+        android:pathData="M 35,40 m -7,0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
+
+    <path
+        android:name="ojo_derecho"
+        android:fillColor="@android:color/black"
+        android:pathData="M 65,40 m -7,0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
+
+    <path
+        android:name="boca_triste"
+        android:strokeColor="@color/black"
+        android:strokeWidth="2"
+        android:pathData="M 30,75 Q 50,55 70,75" />
+
+
+</vector>

@@ -1,0 +1,10 @@
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/baseline_smiling_face">
+
+    <target
+        android:animation="@animator/sad_to_happy"
+        android:name="boca_triste" />
+
+
+</animated-vector>
