@@ -1,0 +1,10 @@
+<animated-vector android:drawable="@drawable/baseline_pause_24"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <target
+        android:animation="@animator/pause1_to_play"
+        android:name="pause1" />
+    <target
+        android:animation="@animator/pause2_to_play"
+        android:name="pause2" />
+</animated-vector>
