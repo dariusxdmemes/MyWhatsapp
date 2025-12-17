@@ -4,6 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.core.AnimationVector
+import androidx.compose.animation.graphics.res.animatedVectorResource
+import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
+import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -25,7 +29,11 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
@@ -48,6 +56,13 @@ class MainActivity : ComponentActivity() {
                 val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
                 val pagerState = rememberPagerState(pageCount = { 3 })
                 val coroutine = rememberCoroutineScope()
+                var checked by remember { mutableStateOf(false) }
+
+                val image = AnimatedImageVector.animatedVectorResource(R.drawable.avd_tick_to_cross)
+                val painter = rememberAnimatedVectorPainter(
+                    animatedImageVector = image,
+                    atEnd = checked
+                )
 
                 Scaffold(
                     modifier = Modifier
@@ -55,12 +70,14 @@ class MainActivity : ComponentActivity() {
                         .nestedScroll(scrollBehavior.nestedScrollConnection),
                     floatingActionButton = {
                         FloatingActionButton(
-                            onClick = {/* Hacer algo */},
+                            onClick = {
+                                checked = !checked
+                            },
                             containerColor = MaterialTheme.colorScheme.secondary,
                             contentColor = MaterialTheme.colorScheme.onPrimary
                         ) {
                             Icon(
-                                Icons.Default.Done,
+                                painter = painter,
                                 contentDescription = "Icono FAB"
                             )
                         }
